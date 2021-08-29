@@ -1,3 +1,11 @@
+# Disclaimer
+
+This fork provides the temporary solution for [sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) package.  
+I can't figure out how to use `*sql.DB.Select()` without sending `WITH TOTALS` query results into the same blocks data channel where the rest is sent.  
+Using `Select()` and `Get()` became so usual for me so I prefer at least for self to use this little fix than building crutches around existing or new code.  
+Write less, code more.  
+Use it at your own risk if you wish.
+
 # ClickHouse [![Build Status](https://travis-ci.org/ClickHouse/clickhouse-go.svg?branch=master)](https://travis-ci.org/ClickHouse/clickhouse-go) [![Go Report Card](https://goreportcard.com/badge/github.com/ClickHouse/clickhouse-go)](https://goreportcard.com/report/github.com/ClickHouse/clickhouse-go) [![codecov](https://codecov.io/gh/ClickHouse/clickhouse-go/branch/master/graph/badge.svg)](https://codecov.io/gh/ClickHouse/clickhouse-go)
 
 Golang SQL database driver for [Yandex ClickHouse](https://clickhouse.yandex/)
@@ -19,7 +27,7 @@ Golang SQL database driver for [Yandex ClickHouse](https://clickhouse.yandex/)
 * no_delay   - disable/enable the Nagle Algorithm for tcp socket (default is 'true' - disable)
 * alt_hosts  - comma separated list of single address host for load-balancing
 * connection_open_strategy - random/in_order (default random).
-    * random      - choose random server from set  
+    * random      - choose random server from set
     * in_order    - first live server is choosen in specified order
     * time_random - choose random(based on current time) server from set. This option differs from `random` in that randomness is based on current time rather than on amount of previous connections.
 * block_size - maximum rows in block (default is 1000000). If the rows are larger then the data will be split into several blocks to send them to the server. If one block was sent to the server, the data will be persisted on the server disk, we can't rollback the transaction. So always keep in mind that the batch size no larger than the block_size if you want atomic batch insert.
@@ -269,7 +277,7 @@ func main() {
 		},
 		Columns: []column.Column{col},
 	}
-	
+
     rows, err := connect.Query("SELECT country_code, os_id, browser_id, categories, action_day, action_time "+
             "FROM example WHERE country_code IN ?", countriesExternalTable)
 	if err != nil {
