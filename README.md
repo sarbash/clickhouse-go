@@ -1,7 +1,7 @@
 # Disclaimer
 
 This fork provides the temporary solution for [sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) package.  
-I can't figure out how to use `*sql.DB.Select()` without sending `WITH TOTALS` query results into the same blocks data channel where the rest is sent.  
+I can't figure out how to use `*sqlx.DB.Select()` without sending `WITH TOTALS` query results into the same blocks data channel where the rest is sent.  
 Using `Select()` and `Get()` became so usual for me so I prefer at least for self to use this little fix than building crutches around existing or new code.  
 Write less, code more.  
 Use it at your own risk if you wish.
